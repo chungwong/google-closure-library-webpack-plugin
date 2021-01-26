@@ -21,12 +21,26 @@ module.exports = {
     contentBase: path.resolve(__dirname, 'build')
   },
   module: {
-    rules: [{
-      test: /\.html$/,
-      use: [{
-        loader: "html-loader"
-      }]
-    }]
+    rules: [
+      {
+        test: /\.html$/,
+        use: [{
+          loader: "html-loader"
+        }]
+      },
+      {
+        test: /\.(j|t)s$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'babel-loader'
+          },
+          {
+            loader: "ts-loader"
+          }
+        ]
+      },
+    ]
   },
   plugins: [
     new GCLibraryPlugin({
